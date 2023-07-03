@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,16 +31,31 @@ namespace DesignPatterns
                 return;
             }
 
-            Drawable last = history.Last();
-            history.Pop();
+            Drawable last = history.First();
+            Trace.WriteLine(last);
+            last.setVisible(false);
             redoArray.Push(last);
         }
 
         public void redo()
         {
-            if (redoArray.Count == 0)
+            if (redoArray.Count == 0 || history.Count == 0)
             {
+                return;
+            }
 
+            Drawable redoAction = redoArray.First();
+            Drawable lastAction = history.First();
+
+            if (redoAction == lastAction) {
+                history.Pop();
+                redoArray.Pop();
+
+                redoAction.setVisible(true);
+                history.Push(redoAction);
+            } else
+            {
+                Trace.WriteLine("Not the same objects...");
             }
         }
     }

@@ -13,12 +13,23 @@ namespace DesignPatterns
         protected Point startPos;
         protected Point endPos;
         protected Pen pen;
+        protected bool visible = true;
 
         public Drawable() { }
 
         public abstract void draw(Graphics graph);
         public abstract bool isInBounds(Point p);
         public abstract void accept(Visitor visitor);
+
+        public bool isVisible()
+        {
+            return visible;
+        }
+
+        public void setVisible(bool visible)
+        {
+            this.visible = visible;
+        }
     }
 
     public class RectangleDrawable : Drawable

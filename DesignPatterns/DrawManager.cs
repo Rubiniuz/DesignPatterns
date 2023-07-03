@@ -31,7 +31,7 @@ namespace DesignPatterns
             Stack<Drawable> list = history.get();
             foreach (Drawable d in list)
             {
-                if (d != null)
+                if (d != null && d.isVisible())
                 {
                     commands.Add(d);
                 }

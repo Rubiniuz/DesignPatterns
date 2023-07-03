@@ -191,8 +191,6 @@ namespace DesignPatterns
         private Boolean bUndoDown = false;
         void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-
-            Trace.WriteLine("Geklikt!!!");
             switch (e.KeyCode)
             {
                 case Keys.Z:
@@ -201,7 +199,9 @@ namespace DesignPatterns
                     if (e.Modifiers == (Keys.Control | Keys.Shift))
                     {
                         bUndoDown = true;
-                        //REDO
+                        history.redo();
+
+                        DrawManager.GetInstance().renderSurface(history, graph, g);
                     } else if (Control.ModifierKeys == Keys.Control)
                     {
                         bUndoDown = true;
