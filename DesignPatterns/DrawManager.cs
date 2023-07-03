@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DesignPatterns
 {
@@ -29,12 +30,12 @@ namespace DesignPatterns
         {
             commands.Clear();
 
-            Stack<Drawable> list = history.get();
+            Stack<Drawable> list = history.get(); // Use select move and scale to alter data.
             foreach (Drawable d in list)
             {
                 if (d != null && d.isVisible())
                 {
-                    commands.Add(d);
+                    //commands.Add(d);
                     // if one command is selection.
                     if (d.GetType() == typeof(SelectionDrawable))
                     {
@@ -78,10 +79,29 @@ namespace DesignPatterns
                         {
                             Point sp = dm.getStartPos();
                             Point ep = dm.getEndPos();
-                            ep.X *= change.X;
-                            ep.Y *= change.Y;
+                            sp.X -= change.X;
+                            sp.Y -= change.Y;
+                            ep.X += change.X;
+                            ep.Y += change.Y;
+                            dm.setStartPos(sp);
                             dm.setEndPos(ep);
                         }
+                    }
+                }
+            }
+
+            foreach (var d in list)
+            {
+                if (d != null && d.isVisible())
+                {
+                    Type type = d.GetType();
+                    if (type == typeof(SelectionDrawable) || type == typeof(MoveDrawable) || type == typeof(ScaleDrawable))
+                    {
+                        // Do nothing.
+                    }
+                    else
+                    {
+                        commands.Add(d);
                     }
                 }
             }

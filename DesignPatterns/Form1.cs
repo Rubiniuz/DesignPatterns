@@ -265,19 +265,16 @@ namespace DesignPatterns
 
         private void move_button_Click(object sender, EventArgs e)
         {
-            pen.Color = Color.White;
             drawState = DrawState.MOVE;
         }
 
         private void resize_button_Click(object sender, EventArgs e)
         {
-            pen.Color = Color.White;
             drawState = DrawState.SCALE;
         }
         
         private void select_button_Click(object sender, EventArgs e)
         {
-            pen.Color = Color.White;
             drawState = DrawState.SELECT;
         }
     }

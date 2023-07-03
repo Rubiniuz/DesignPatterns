@@ -266,7 +266,8 @@ namespace DesignPatterns
         
         public Point getChange()
         {
-            return new Point(endPos.X - startPos.X, endPos.Y - startPos.Y);
+            (Point, Point) bounds = GetNormalBounds();
+            return new Point(bounds.Item2.X - bounds.Item1.X, bounds.Item2.Y - bounds.Item1.Y);
         }
     }
     
