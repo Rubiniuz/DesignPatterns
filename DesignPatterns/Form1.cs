@@ -63,20 +63,24 @@ namespace DesignPatterns
         {
             isRectangleMoving = false;
 
-            int width = e.X - old.X;
-            int height = e.Y - old.Y;
+            (Point,Point) normalized = NormalizePoints(old, e.Location);
+            Point Minval = normalized.Item1;
+            Point Maxval = normalized.Item2;
 
-            Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
+            int width = Maxval.X - Minval.X;
+            int height = Maxval.Y - Minval.Y;
+
+            Rectangle rect = new Rectangle(Minval.X, Minval.Y, width * Math.Sign(width), height * Math.Sign(height));
 
             if (drawState == DrawState.RECTANGLE) {
                 g.DrawRectangle(pen, rect);
 
-                RectangleDrawable rd = new RectangleDrawable(old, e.Location, pen);
+                RectangleDrawable rd = new RectangleDrawable(Minval, Maxval, pen);
                 history.push(rd);
             } else if (drawState == DrawState.ELLIPSE) {
                 g.DrawEllipse(pen, rect);
 
-                EllipseDrawable ed = new EllipseDrawable(old, e.Location, pen);
+                EllipseDrawable ed = new EllipseDrawable(Minval, Maxval, pen);
                 history.push(ed);
             }
 
@@ -183,6 +187,36 @@ namespace DesignPatterns
                 g = canvasPanel.CreateGraphics();
 
             }
+        }
+
+        private (Point,Point) NormalizePoints(Point startPos, Point endPos)
+        {
+            Point MinVal = new Point();
+            Point Maxval = new Point();
+
+            if (startPos.X < endPos.X)
+            {
+                MinVal.X = startPos.X;
+                Maxval.X = endPos.X;
+            }
+            else
+            {
+                MinVal.X = endPos.X;
+                Maxval.X = startPos.X;
+            }
+            
+            if (startPos.Y < endPos.Y)
+            {
+                MinVal.Y = startPos.Y;
+                Maxval.Y = endPos.Y;
+            }
+            else
+            {
+                MinVal.Y = endPos.Y;
+                Maxval.Y = startPos.Y;
+            }
+            
+            return (MinVal,Maxval);
         }
     }
 }
