@@ -79,7 +79,6 @@ namespace DesignPatterns
 
             Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
 
-
             if (drawState == DrawState.Rectangle) {
                 g.DrawRectangle(pen, rect);
                 graph.DrawRectangle(pen, rect);
@@ -175,7 +174,7 @@ namespace DesignPatterns
             drawState = DrawState.Rectangle;
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void ellipse_button_Click(object sender, EventArgs e)
         {
             drawState = DrawState.Elipse;
         }
