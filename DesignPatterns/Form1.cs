@@ -25,6 +25,8 @@ namespace DesignPatterns
         Bitmap surface;
         public DrawState drawState = DrawState.BRUSH;
 
+        public DrawableHistory history;
+
         public Form1()
         {
             InitializeComponent();
@@ -59,6 +61,9 @@ namespace DesignPatterns
                     g.DrawLine(pen, old, current);
                     graph.DrawLine(pen, old, current);
 
+                    LineDrawable ld = new LineDrawable(old, current, pen);
+                    history.push(ld);
+
                     old = current;
                 }
             }
@@ -74,11 +79,17 @@ namespace DesignPatterns
 
             if (drawState == DrawState.RECTANGLE) {
                 g.DrawRectangle(pen, rect);
-                graph.DrawRectangle(pen, rect);
+
+                RectangleDrawable rd = new RectangleDrawable(old, e.Location, pen);
+                history.push(rd);
             } else if (drawState == DrawState.ELLIPSE) {
                 g.DrawEllipse(pen, rect);
-                graph.DrawEllipse(pen, rect);
+
+                EllipseDrawable ed = new EllipseDrawable(old, e.Location, pen);
+                history.push(ed);
             }
+
+
         }
 
         private Point mouseOffsetPos;

@@ -14,11 +14,20 @@ namespace DesignPatterns
         protected Point endPos;
         protected Pen pen;
 
+        public Drawable() { }
+
         public abstract void draw(Graphics graph);
     }
 
     public class LineDrawable : Drawable
     {
+
+        public LineDrawable(Point _startPos, Point _endPos, Pen _pen)
+        {
+            this.startPos = _startPos;
+            this.endPos = _endPos;
+            this.pen = _pen;
+        }
         public override void draw(Graphics graph)
         {
             graph.DrawLine(pen, startPos, endPos);
@@ -27,6 +36,13 @@ namespace DesignPatterns
 
     public class RectangleDrawable : Drawable
     {
+
+        public RectangleDrawable(Point _startPos, Point _endPos, Pen _pen)
+        {
+            this.startPos = _startPos;
+            this.endPos = _endPos;
+            this.pen = _pen;
+        }
         public override void draw(Graphics graph)
         {
             int width = endPos.X - startPos.X;
@@ -39,6 +55,14 @@ namespace DesignPatterns
 
     public class EllipseDrawable : Drawable
     {
+
+        public EllipseDrawable(Point _startPos, Point _endPos, Pen _pen)
+        {
+            this.startPos = _startPos;
+            this.endPos = _endPos;
+            this.pen = _pen;
+        }
+
         public override void draw(Graphics graph)
         {
             int width = endPos.X - startPos.X;
