@@ -65,6 +65,9 @@ namespace DesignPatterns
             this.TopPanel.Name = "TopPanel";
             this.TopPanel.Size = new System.Drawing.Size(800, 51);
             this.TopPanel.TabIndex = 0;
+            this.TopPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
+            this.TopPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
+            this.TopPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
             // 
             // exit_button
             // 
@@ -74,6 +77,7 @@ namespace DesignPatterns
             this.exit_button.TabIndex = 3;
             this.exit_button.Text = "Sluiten";
             this.exit_button.UseVisualStyleBackColor = true;
+            this.exit_button.Click += new System.EventHandler(this.exit_button_Click);
             // 
             // clear_button
             // 
@@ -83,6 +87,7 @@ namespace DesignPatterns
             this.clear_button.TabIndex = 2;
             this.clear_button.Text = "Legen";
             this.clear_button.UseVisualStyleBackColor = true;
+            this.clear_button.Click += new System.EventHandler(this.clear_button_Click);
             // 
             // save_button
             // 
@@ -92,6 +97,7 @@ namespace DesignPatterns
             this.save_button.TabIndex = 1;
             this.save_button.Text = "Opslaan";
             this.save_button.UseVisualStyleBackColor = true;
+            this.save_button.Click += new System.EventHandler(this.save_button_Click);
             // 
             // label1
             // 
@@ -102,7 +108,6 @@ namespace DesignPatterns
             this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Teken applicatie";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox1
             // 
@@ -123,6 +128,8 @@ namespace DesignPatterns
             this.canvasPanel.Name = "canvasPanel";
             this.canvasPanel.Size = new System.Drawing.Size(800, 399);
             this.canvasPanel.TabIndex = 1;
+            this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
+            this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
             // 
             // toolboxPanel
             // 
@@ -145,6 +152,7 @@ namespace DesignPatterns
             this.colorbox.Size = new System.Drawing.Size(58, 53);
             this.colorbox.TabIndex = 3;
             this.colorbox.TabStop = false;
+            this.colorbox.Click += new System.EventHandler(this.colorbox_Click);
             // 
             // paintbrush_size
             // 
@@ -162,6 +170,7 @@ namespace DesignPatterns
             this.eraser_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.eraser_button.TabIndex = 1;
             this.eraser_button.TabStop = false;
+            this.eraser_button.Click += new System.EventHandler(this.eraser_button_Click);
             // 
             // paintbrush_button
             // 
@@ -172,6 +181,7 @@ namespace DesignPatterns
             this.paintbrush_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.paintbrush_button.TabIndex = 0;
             this.paintbrush_button.TabStop = false;
+            this.paintbrush_button.Click += new System.EventHandler(this.paintbrush_button_Click);
             // 
             // Form1
             // 
