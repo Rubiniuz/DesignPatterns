@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace DesignPatterns
 {
     public enum DrawState {
-        BRUSH,
         RECTANGLE,
         ELLIPSE
     }

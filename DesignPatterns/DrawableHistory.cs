@@ -10,6 +10,8 @@ namespace DesignPatterns
     {
         Stack<Drawable> history = new Stack<Drawable>();
 
+        public DrawableHistory() { }
+
         public void push(Drawable drawable)
         {
             history.Push(drawable);
