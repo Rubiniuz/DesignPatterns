@@ -160,6 +160,12 @@ namespace DesignPatterns
             this.paintbrush_size.Name = "paintbrush_size";
             this.paintbrush_size.Size = new System.Drawing.Size(58, 20);
             this.paintbrush_size.TabIndex = 2;
+            this.paintbrush_size.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.paintbrush_size.ValueChanged += new System.EventHandler(this.paintbrushsize_change);
             // 
             // eraser_button
             // 

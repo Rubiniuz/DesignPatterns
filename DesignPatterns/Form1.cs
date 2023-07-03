@@ -132,5 +132,10 @@ namespace DesignPatterns
                 surface.Save(sfd.FileName, System.Drawing.Imaging.ImageFormat.Png);
             }
         }
+
+        private void paintbrushsize_change(object sender, EventArgs e)
+        {
+            pen.Width = (float)paintbrush_size.Value;
+        }
     }
 }
