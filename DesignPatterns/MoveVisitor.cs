@@ -10,5 +10,17 @@
         {
             //TODO Move Ellipse
         }
+        public void VisitSelection(SelectionDrawable sel)
+        {
+            //No Implementation
+        }
+        public void VisitMove(MoveDrawable move)
+        {
+            //No Implementation
+        }
+        public void VisitScale(ScaleDrawable size)
+        {
+            //No Implementation
+        }
     }
 }
