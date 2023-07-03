@@ -65,11 +65,18 @@ namespace DesignPatterns
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
 
+            (Point,Point) normalized = NormalizePoints(old, e.Location);
+            Point Minval = normalized.Item1;
+            Point Maxval = normalized.Item2;
+
+            int width = Maxval.X - Minval.X;
+            int height = Maxval.Y - Minval.Y;
+
             if (drawState == DrawState.RECTANGLE) {
-                RectangleDrawable rd = new RectangleDrawable(old, e.Location, pen);
+                RectangleDrawable rd = new RectangleDrawable(Minval, Maxval, pen);
                 history.push(rd);
             } else if (drawState == DrawState.ELLIPSE) {
-                EllipseDrawable ed = new EllipseDrawable(old, e.Location, pen);
+                EllipseDrawable ed = new EllipseDrawable(Minval, Maxval, pen);
                 history.push(ed);
             }
 
@@ -214,6 +221,36 @@ namespace DesignPatterns
                     bUndoDown = false;
                 }
             }
+        }
+
+        private (Point,Point) NormalizePoints(Point startPos, Point endPos)
+        {
+            Point MinVal = new Point();
+            Point Maxval = new Point();
+
+            if (startPos.X < endPos.X)
+            {
+                MinVal.X = startPos.X;
+                Maxval.X = endPos.X;
+            }
+            else
+            {
+                MinVal.X = endPos.X;
+                Maxval.X = startPos.X;
+            }
+            
+            if (startPos.Y < endPos.Y)
+            {
+                MinVal.Y = startPos.Y;
+                Maxval.Y = endPos.Y;
+            }
+            else
+            {
+                MinVal.Y = endPos.Y;
+                Maxval.Y = startPos.Y;
+            }
+            
+            return (MinVal,Maxval);
         }
     }
 }
