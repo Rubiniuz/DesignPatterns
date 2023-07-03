@@ -14,24 +14,16 @@ namespace DesignPatterns
     public partial class Form1 : Form
     {
 
-        public enum DrawState
-        {
-            Brush,
-            Rectangle,
-            Elipse
-        }
-
         public Point current = new Point();
         public Point old = new Point();
 
         public Graphics g;
         public Graphics graph;
-        public List<>
 
         public Pen pen = new Pen(Color.Black, 5);
 
         Bitmap surface;
-        public DrawState drawState = DrawState.Brush;
+        public DrawState drawState = DrawState.BRUSH;
 
         public Form1()
         {
@@ -62,7 +54,7 @@ namespace DesignPatterns
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) {
-                if (drawState == DrawState.Brush) {
+                if (drawState == DrawState.BRUSH) {
                     current = e.Location;
                     g.DrawLine(pen, old, current);
                     graph.DrawLine(pen, old, current);
@@ -80,10 +72,10 @@ namespace DesignPatterns
 
             Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
 
-            if (drawState == DrawState.Rectangle) {
+            if (drawState == DrawState.RECTANGLE) {
                 g.DrawRectangle(pen, rect);
                 graph.DrawRectangle(pen, rect);
-            } else if (drawState == DrawState.Elipse) {
+            } else if (drawState == DrawState.ELLIPSE) {
                 g.DrawEllipse(pen, rect);
                 graph.DrawEllipse(pen, rect);
             }
@@ -126,14 +118,14 @@ namespace DesignPatterns
         private void eraser_button_Click(object sender, EventArgs e)
         {
             pen.Color = Color.White;
-            drawState = DrawState.Brush;
+            drawState = DrawState.BRUSH;
 
         }
 
         private void paintbrush_button_Click(object sender, EventArgs e)
         {
             pen.Color = colorbox.BackColor;
-            drawState = DrawState.Brush;
+            drawState = DrawState.BRUSH;
         }
 
         private void colorbox_Click(object sender, EventArgs e)
@@ -173,13 +165,13 @@ namespace DesignPatterns
         private void rectangle_button_Click(object sender, EventArgs e)
         {
             pen.Color = colorbox.BackColor;
-            drawState = DrawState.Rectangle;
+            drawState = DrawState.RECTANGLE;
         }
 
         private void ellipse_button_Click(object sender, EventArgs e)
         {
             pen.Color = colorbox.BackColor;
-            drawState = DrawState.Elipse;
+            drawState = DrawState.ELLIPSE;
         }
 
         private void load_button_Click(object sender, EventArgs e)
