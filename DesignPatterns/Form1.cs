@@ -181,5 +181,27 @@ namespace DesignPatterns
             pen.Color = colorbox.BackColor;
             drawState = DrawState.Elipse;
         }
+
+        private void load_button_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Png Bestanden (*png) | *.png";
+            ofd.DefaultExt = "png";
+            ofd.AddExtension = true;
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                // Load Image to bitmap
+                Image img = Image.FromFile(ofd.FileName);
+                surface = new Bitmap(img);
+                
+                // Update Drawing area
+                graph = Graphics.FromImage(surface);
+                canvasPanel.BackgroundImage = surface;
+                canvasPanel.BackgroundImageLayout = ImageLayout.None;
+                g = canvasPanel.CreateGraphics();
+
+            }
+        }
     }
 }
