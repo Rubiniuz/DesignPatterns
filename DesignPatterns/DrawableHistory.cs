@@ -9,7 +9,7 @@ namespace DesignPatterns
     public class DrawableHistory
     {
         Stack<Drawable> history = new Stack<Drawable>();
-        Stack<Drawable> redo = new Stack<Drawable>();
+        Stack<Drawable> redoArray = new Stack<Drawable>();
 
         public DrawableHistory() { }
 
@@ -32,7 +32,15 @@ namespace DesignPatterns
 
             Drawable last = history.Last();
             history.Pop();
-            redo.Push(last);
+            redoArray.Push(last);
+        }
+
+        public void redo()
+        {
+            if (redoArray.Count == 0)
+            {
+
+            }
         }
     }
 }
