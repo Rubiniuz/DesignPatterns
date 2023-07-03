@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drawables.cs" />
     <Compile Include="DrawableHistory.cs" />
+    <Compile Include="Drawables.cs" />
     <Compile Include="Drawables.cs" />
     <Compile Include="DrawState.cs" />
     <Compile Include="Form1.cs">
