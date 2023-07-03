@@ -47,6 +47,8 @@ namespace DesignPatterns
             pen.Width = (float)paintbrush_size.Value;
 
             //Initialize events
+            Trace.WriteLine("Events initialized");
+            this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.KeyUp += new KeyEventHandler(Form1_KeyUp);
         }
@@ -187,7 +189,7 @@ namespace DesignPatterns
         }
 
         private Boolean bUndoDown = false;
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        void Form1_KeyDown(object sender, KeyEventArgs e)
         {
 
             Trace.WriteLine("Geklikt!!!");
@@ -212,7 +214,7 @@ namespace DesignPatterns
             }
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             if (bUndoDown)
             {

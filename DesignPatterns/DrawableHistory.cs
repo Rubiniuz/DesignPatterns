@@ -25,6 +25,11 @@ namespace DesignPatterns
 
         public void undo()
         {
+            if (history.Count == 0)
+            {
+                return;
+            }
+
             Drawable last = history.Last();
             history.Pop();
             redo.Push(last);

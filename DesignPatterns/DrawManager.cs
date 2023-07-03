@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,8 @@ namespace DesignPatterns
 
         public void renderSurface(DrawableHistory history, Graphics graph, Graphics g)
         {
+            commands.Clear();
+
             Stack<Drawable> list = history.get();
             foreach (Drawable d in list)
             {
