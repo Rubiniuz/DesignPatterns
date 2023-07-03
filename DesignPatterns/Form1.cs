@@ -13,7 +13,7 @@ namespace DesignPatterns
 {
     public partial class Form1 : Form
     {
-
+        
         public Point current = new Point();
         public Point old = new Point();
 
@@ -54,12 +54,43 @@ namespace DesignPatterns
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) {
-                if (drawState == DrawState.BRUSH) {
+                /*if (drawState == DrawState.BRUSH) {
                     current = e.Location;
                     g.DrawLine(pen, old, current);
                     graph.DrawLine(pen, old, current);
-
                     old = current;
+                }*/
+
+                switch (drawState)
+                {
+                    case DrawState.BRUSH:
+                        current = e.Location;
+                        g.DrawLine(pen, old, current);
+                        graph.DrawLine(pen, old, current);
+                        old = current;
+                    break;
+                    
+                    case DrawState.RECTANGLE:
+                        if (isRectangleMoving)
+                        {
+                            int width = e.X - old.X;
+                            int height = e.Y - old.Y;
+                            
+                            Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
+                            //TODO TMP DRAWABLE RECTANGLE
+                        }
+                    break;
+                    
+                    case DrawState.ELLIPSE:
+                        if (isRectangleMoving)
+                        {
+                            int width = e.X - old.X;
+                            int height = e.Y - old.Y;
+                            
+                            Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
+                            //TODO TMP DRAWABLE ELIPSE
+                        }
+                    break;
                 }
             }
         }
