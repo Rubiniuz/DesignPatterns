@@ -18,26 +18,7 @@ namespace DesignPatterns
 
         public abstract void draw(Graphics graph);
         public abstract bool isInBounds(Point p);
-    }
-
-    public class LineDrawable : Drawable
-    {
-
-        public LineDrawable(Point _startPos, Point _endPos, Pen _pen)
-        {
-            this.startPos = _startPos;
-            this.endPos = _endPos;
-            this.pen = _pen;
-        }
-        public override void draw(Graphics graph)
-        {
-            graph.DrawLine(pen, startPos, endPos);
-        }
-
-        public override bool isInBounds(Point p)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void accept(Visitor visitor);
     }
 
     public class RectangleDrawable : Drawable
@@ -94,6 +75,11 @@ namespace DesignPatterns
                 return false; // Not in Bounds
             }
         }
+        
+        public override void accept(Visitor visitor)
+        {
+            visitor.VisitRectangle(this);
+        }
     }
 
     public class EllipseDrawable : Drawable
@@ -127,6 +113,11 @@ namespace DesignPatterns
                       / (double)Math.Pow(height, 2));
                       
             return res <= 1 ? true : false;
+        }
+        
+        public override void accept(Visitor visitor)
+        {
+            visitor.VisitEllipse(this);
         }
     }
 }
