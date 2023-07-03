@@ -30,6 +30,56 @@ namespace DesignPatterns
         {
             this.visible = visible;
         }
+        
+        public (Point, Point) GetNormalBounds()
+        {
+            Point MinVal = new Point();
+            Point Maxval = new Point();
+
+            if (startPos.X < endPos.X)
+            {
+                MinVal.X = startPos.X;
+                Maxval.X = endPos.X;
+            }
+            else
+            {
+                MinVal.X = endPos.X;
+                Maxval.X = startPos.X;
+            }
+            
+            if (startPos.Y < endPos.Y)
+            {
+                MinVal.Y = startPos.Y;
+                Maxval.Y = endPos.Y;
+            }
+            else
+            {
+                MinVal.Y = endPos.Y;
+                Maxval.Y = startPos.Y;
+            }
+            
+            return (MinVal,Maxval);
+        }
+        
+        public Point getStartPos()
+        {
+            return startPos;
+        }
+        
+        public Point getEndPos()
+        {
+            return endPos;
+        }
+        
+        public void setStartPos(Point startPos)
+        {
+            this.startPos = startPos;
+        }
+        
+        public void setEndPos(Point endPos)
+        {
+            this.endPos = endPos;
+        }
     }
 
     public class RectangleDrawable : Drawable
@@ -213,6 +263,11 @@ namespace DesignPatterns
         {
             visitor.VisitMove(this);
         }
+        
+        public Point getChange()
+        {
+            return new Point(endPos.X - startPos.X, endPos.Y - startPos.Y);
+        }
     }
     
     public class ScaleDrawable : Drawable
@@ -237,6 +292,11 @@ namespace DesignPatterns
         public override void accept(Visitor visitor)
         {
             visitor.VisitScale(this);
+        }
+        
+        public Point getChange()
+        {
+            return new Point(endPos.X - startPos.X, endPos.Y - startPos.Y);
         }
     }
 }

@@ -8,6 +8,9 @@ namespace DesignPatterns
 {
     public enum DrawState {
         RECTANGLE,
-        ELLIPSE
+        ELLIPSE,
+        SELECT,
+        MOVE,
+        SCALE
     }
 }

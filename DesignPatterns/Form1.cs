@@ -14,7 +14,6 @@ namespace DesignPatterns
 {
     public partial class Form1 : Form
     {
-
         public Point current = new Point();
         public Point old = new Point();
 
@@ -80,6 +79,15 @@ namespace DesignPatterns
             } else if (drawState == DrawState.ELLIPSE) {
                 EllipseDrawable ed = new EllipseDrawable(Minval, Maxval, pen);
                 history.push(ed);
+            } else if (drawState == DrawState.SELECT) {
+                SelectionDrawable sd = new SelectionDrawable(Minval, Maxval, pen);
+                history.push(sd);
+            } else if (drawState == DrawState.MOVE) {
+                MoveDrawable md = new MoveDrawable(Minval, Maxval, pen);
+                history.push(md);
+            } else if (drawState == DrawState.SCALE) {
+                ScaleDrawable sd = new ScaleDrawable(Minval, Maxval, pen);
+                history.push(sd);
             }
 
             Trace.WriteLine("MouseUP");
@@ -255,19 +263,22 @@ namespace DesignPatterns
             return (MinVal,Maxval);
         }
 
-        private void select_button_Click(object sender, EventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
         private void move_button_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            pen.Color = Color.White;
+            drawState = DrawState.MOVE;
         }
 
         private void resize_button_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            pen.Color = Color.White;
+            drawState = DrawState.SCALE;
+        }
+        
+        private void select_button_Click(object sender, EventArgs e)
+        {
+            pen.Color = Color.White;
+            drawState = DrawState.SELECT;
         }
     }
 }

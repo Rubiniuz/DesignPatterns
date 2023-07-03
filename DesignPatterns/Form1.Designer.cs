@@ -181,6 +181,7 @@ namespace DesignPatterns
             this.resize_button.Location = new System.Drawing.Point(8, 259);
             this.resize_button.Name = "resize_button";
             this.resize_button.Size = new System.Drawing.Size(57, 57);
+            this.resize_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.resize_button.TabIndex = 8;
             this.resize_button.TabStop = false;
             this.resize_button.Click += new System.EventHandler(this.resize_button_Click);
@@ -206,6 +207,7 @@ namespace DesignPatterns
             this.select_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.select_button.TabIndex = 6;
             this.select_button.TabStop = false;
+            this.select_button.Click += new System.EventHandler(this.select_button_Click);
             // 
             // ellipse_button
             // 
