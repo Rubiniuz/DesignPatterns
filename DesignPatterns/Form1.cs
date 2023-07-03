@@ -171,11 +171,13 @@ namespace DesignPatterns
 
         private void rectangle_button_Click(object sender, EventArgs e)
         {
+            pen.Color = colorbox.BackColor;
             drawState = DrawState.Rectangle;
         }
 
         private void ellipse_button_Click(object sender, EventArgs e)
         {
+            pen.Color = colorbox.BackColor;
             drawState = DrawState.Elipse;
         }
     }
