@@ -43,6 +43,7 @@ namespace DesignPatterns
             this.paintbrush_size = new System.Windows.Forms.NumericUpDown();
             this.eraser_button = new System.Windows.Forms.PictureBox();
             this.paintbrush_button = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.canvasPanel.SuspendLayout();
@@ -52,6 +53,7 @@ namespace DesignPatterns
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eraser_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_button)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // TopPanel
@@ -137,6 +139,7 @@ namespace DesignPatterns
             // toolboxPanel
             // 
             this.toolboxPanel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.toolboxPanel.Controls.Add(this.pictureBox2);
             this.toolboxPanel.Controls.Add(this.rectangle_button);
             this.toolboxPanel.Controls.Add(this.colorbox);
             this.toolboxPanel.Controls.Add(this.paintbrush_size);
@@ -204,6 +207,17 @@ namespace DesignPatterns
             this.paintbrush_button.TabStop = false;
             this.paintbrush_button.Click += new System.EventHandler(this.paintbrush_button_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(7, 157);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(43, 40);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,6 +238,7 @@ namespace DesignPatterns
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eraser_button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_button)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -243,6 +258,7 @@ namespace DesignPatterns
         private System.Windows.Forms.PictureBox eraser_button;
         private System.Windows.Forms.PictureBox paintbrush_button;
         private System.Windows.Forms.PictureBox rectangle_button;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

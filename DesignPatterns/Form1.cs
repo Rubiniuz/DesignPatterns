@@ -73,14 +73,19 @@ namespace DesignPatterns
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
             isRectangleMoving = false;
+
+            int width = e.X - old.X;
+            int height = e.Y - old.Y;
+
+            Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
+
+
             if (drawState == DrawState.Rectangle) {
-                int width = e.X - old.X;
-                int height = e.Y - old.Y;
-
-                Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
-
                 g.DrawRectangle(pen, rect);
                 graph.DrawRectangle(pen, rect);
+            } else if (drawState == DrawState.Elipse) {
+                g.DrawEllipse(pen, rect);
+                graph.DrawEllipse(pen, rect);
             }
         }
 
@@ -168,6 +173,11 @@ namespace DesignPatterns
         private void rectangle_button_Click(object sender, EventArgs e)
         {
             drawState = DrawState.Rectangle;
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            drawState = DrawState.Elipse;
         }
     }
 }
