@@ -26,6 +26,7 @@ namespace DesignPatterns
 
         public Graphics g;
         public Graphics graph;
+        public List<>
 
         public Pen pen = new Pen(Color.Black, 5);
 
