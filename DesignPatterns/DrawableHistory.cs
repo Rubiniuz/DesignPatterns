@@ -10,7 +10,7 @@ namespace DesignPatterns
     public class DrawableHistory
     {
         Stack<Drawable> history = new Stack<Drawable>();
-        Stack<Drawable> redoArray = new Stack<Drawable>();
+        List<Drawable> redoArray = new List<Drawable>();
 
         public DrawableHistory() { }
 
@@ -26,30 +26,24 @@ namespace DesignPatterns
 
         public void undo()
         {
-            if (history.Count == 0)
-            {
-                return;
-            }
 
-            Drawable last = history.First();
+            Drawable last = this.getNextCommand(history, true);
+            if (last == null) return;
+
             Trace.WriteLine(last);
             last.setVisible(false);
-            redoArray.Push(last);
+            redoArray.Add(last);
         }
 
         public void redo()
         {
-            if (redoArray.Count == 0 || history.Count == 0)
-            {
-                return;
-            }
-
-            Drawable redoAction = redoArray.First();
-            Drawable lastAction = history.First();
+            Drawable redoAction = redoArray.Last();
+            Drawable lastAction = this.getNextCommand(history, false);
+            if (redoAction == null || lastAction == null) return;
 
             if (redoAction == lastAction) {
                 history.Pop();
-                redoArray.Pop();
+                redoArray.RemoveAt(redoArray.Count - 1);
 
                 redoAction.setVisible(true);
                 history.Push(redoAction);
@@ -57,6 +51,19 @@ namespace DesignPatterns
             {
                 Trace.WriteLine("Not the same objects...");
             }
+        }
+
+        private Drawable getNextCommand(Stack<Drawable> array, bool isVisible)
+        {
+            foreach(Drawable drawable in array)
+            {
+                if (drawable != null && (drawable.isVisible() == isVisible))
+                {
+                    return drawable;
+                }
+            }
+
+            return null;
         }
     }
 }
