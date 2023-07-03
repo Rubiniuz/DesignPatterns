@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -44,13 +45,15 @@ namespace DesignPatterns
             canvasPanel.BackgroundImageLayout = ImageLayout.None;
 
             pen.Width = (float)paintbrush_size.Value;
+
+            //Initialize events
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
+            this.KeyUp += new KeyEventHandler(Form1_KeyUp);
         }
 
-        private Boolean isRectangleMoving = false;
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             old = e.Location;
-            isRectangleMoving = true;
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
@@ -61,26 +64,17 @@ namespace DesignPatterns
         }
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
-            isRectangleMoving = false;
-
-            int width = e.X - old.X;
-            int height = e.Y - old.Y;
-
-            Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
 
             if (drawState == DrawState.RECTANGLE) {
-                g.DrawRectangle(pen, rect);
-
                 RectangleDrawable rd = new RectangleDrawable(old, e.Location, pen);
                 history.push(rd);
             } else if (drawState == DrawState.ELLIPSE) {
-                g.DrawEllipse(pen, rect);
-
                 EllipseDrawable ed = new EllipseDrawable(old, e.Location, pen);
                 history.push(ed);
             }
 
-
+            Trace.WriteLine("MouseUP");
+            DrawManager.GetInstance().renderSurface(history, graph, g);
         }
 
         private Point mouseOffsetPos;
@@ -182,6 +176,43 @@ namespace DesignPatterns
                 canvasPanel.BackgroundImageLayout = ImageLayout.None;
                 g = canvasPanel.CreateGraphics();
 
+            }
+        }
+
+        private Boolean bUndoDown = false;
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            Trace.WriteLine("Geklikt!!!");
+            switch (e.KeyCode)
+            {
+                case Keys.Z:
+                    if (bUndoDown) break;
+
+                    if (e.Modifiers == (Keys.Control | Keys.Shift))
+                    {
+                        bUndoDown = true;
+                        //REDO
+                    } else if (Control.ModifierKeys == Keys.Control)
+                    {
+                        bUndoDown = true;
+                        history.undo();
+
+                        DrawManager.GetInstance().renderSurface(history, graph, g);
+                    }
+                    break;
+
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (bUndoDown)
+            {
+                if (e.KeyCode == Keys.Z)
+                {
+                    bUndoDown = false;
+                }
             }
         }
     }

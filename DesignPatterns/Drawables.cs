@@ -55,7 +55,7 @@ namespace DesignPatterns
             int height = endPos.Y - startPos.Y;
 
             Rectangle rect = new Rectangle(startPos.X, startPos.Y, width * Math.Sign(width), height * Math.Sign(height));
-            graph.DrawEllipse(pen, rect);
+            graph.DrawRectangle(pen, rect);
         }
         
         public override bool isInBounds(Point p)

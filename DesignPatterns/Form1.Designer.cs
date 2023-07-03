@@ -124,9 +124,9 @@ namespace DesignPatterns
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-2, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(-3, -1);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 54);
+            this.pictureBox1.Size = new System.Drawing.Size(61, 54);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -154,14 +154,14 @@ namespace DesignPatterns
             this.toolboxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolboxPanel.Location = new System.Drawing.Point(0, 0);
             this.toolboxPanel.Name = "toolboxPanel";
-            this.toolboxPanel.Size = new System.Drawing.Size(58, 399);
+            this.toolboxPanel.Size = new System.Drawing.Size(55, 399);
             this.toolboxPanel.TabIndex = 0;
             // 
             // ellipse_button
             // 
             this.ellipse_button.Image = ((System.Drawing.Image)(resources.GetObject("ellipse_button.Image")));
-            this.ellipse_button.Location = new System.Drawing.Point(7, 58);
-            this.ellipse_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ellipse_button.Location = new System.Drawing.Point(6, 58);
+            this.ellipse_button.Margin = new System.Windows.Forms.Padding(2);
             this.ellipse_button.Name = "ellipse_button";
             this.ellipse_button.Size = new System.Drawing.Size(43, 46);
             this.ellipse_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -172,8 +172,8 @@ namespace DesignPatterns
             // rectangle_button
             // 
             this.rectangle_button.Image = ((System.Drawing.Image)(resources.GetObject("rectangle_button.Image")));
-            this.rectangle_button.Location = new System.Drawing.Point(7, 7);
-            this.rectangle_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rectangle_button.Location = new System.Drawing.Point(6, 7);
+            this.rectangle_button.Margin = new System.Windows.Forms.Padding(2);
             this.rectangle_button.Name = "rectangle_button";
             this.rectangle_button.Size = new System.Drawing.Size(43, 46);
             this.rectangle_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
