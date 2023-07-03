@@ -23,9 +23,9 @@ namespace DesignPatterns
         public Pen pen = new Pen(Color.Black, 5);
 
         Bitmap surface;
-        public DrawState drawState = DrawState.BRUSH;
+        public DrawState drawState = DrawState.RECTANGLE;
 
-        public DrawableHistory history;
+        public DrawableHistory history = new DrawableHistory();
 
         public Form1()
         {
@@ -56,16 +56,7 @@ namespace DesignPatterns
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) {
-                if (drawState == DrawState.BRUSH) {
-                    current = e.Location;
-                    g.DrawLine(pen, old, current);
-                    graph.DrawLine(pen, old, current);
-
-                    LineDrawable ld = new LineDrawable(old, current, pen);
-                    history.push(ld);
-
-                    old = current;
-                }
+               
             }
         }
         private void canvas_MouseUp(object sender, MouseEventArgs e)
@@ -124,19 +115,6 @@ namespace DesignPatterns
         private void exit_button_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void eraser_button_Click(object sender, EventArgs e)
-        {
-            pen.Color = Color.White;
-            drawState = DrawState.BRUSH;
-
-        }
-
-        private void paintbrush_button_Click(object sender, EventArgs e)
-        {
-            pen.Color = colorbox.BackColor;
-            drawState = DrawState.BRUSH;
         }
 
         private void colorbox_Click(object sender, EventArgs e)

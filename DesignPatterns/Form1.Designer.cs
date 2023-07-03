@@ -43,8 +43,6 @@ namespace DesignPatterns
             this.rectangle_button = new System.Windows.Forms.PictureBox();
             this.colorbox = new System.Windows.Forms.PictureBox();
             this.paintbrush_size = new System.Windows.Forms.NumericUpDown();
-            this.eraser_button = new System.Windows.Forms.PictureBox();
-            this.paintbrush_button = new System.Windows.Forms.PictureBox();
             this.TopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.canvasPanel.SuspendLayout();
@@ -53,8 +51,6 @@ namespace DesignPatterns
             ((System.ComponentModel.ISupportInitialize)(this.rectangle_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_size)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eraser_button)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paintbrush_button)).BeginInit();
             this.SuspendLayout();
             // 
             // TopPanel
@@ -68,9 +64,8 @@ namespace DesignPatterns
             this.TopPanel.Controls.Add(this.pictureBox1);
             this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
-            this.TopPanel.Margin = new System.Windows.Forms.Padding(4);
             this.TopPanel.Name = "TopPanel";
-            this.TopPanel.Size = new System.Drawing.Size(1067, 63);
+            this.TopPanel.Size = new System.Drawing.Size(800, 51);
             this.TopPanel.TabIndex = 0;
             this.TopPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
             this.TopPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
@@ -78,10 +73,9 @@ namespace DesignPatterns
             // 
             // load_button
             // 
-            this.load_button.Location = new System.Drawing.Point(577, 17);
-            this.load_button.Margin = new System.Windows.Forms.Padding(4);
+            this.load_button.Location = new System.Drawing.Point(433, 14);
             this.load_button.Name = "load_button";
-            this.load_button.Size = new System.Drawing.Size(100, 28);
+            this.load_button.Size = new System.Drawing.Size(75, 23);
             this.load_button.TabIndex = 4;
             this.load_button.Text = "Laden";
             this.load_button.UseVisualStyleBackColor = true;
@@ -89,10 +83,9 @@ namespace DesignPatterns
             // 
             // exit_button
             // 
-            this.exit_button.Location = new System.Drawing.Point(951, 17);
-            this.exit_button.Margin = new System.Windows.Forms.Padding(4);
+            this.exit_button.Location = new System.Drawing.Point(713, 14);
             this.exit_button.Name = "exit_button";
-            this.exit_button.Size = new System.Drawing.Size(100, 28);
+            this.exit_button.Size = new System.Drawing.Size(75, 23);
             this.exit_button.TabIndex = 3;
             this.exit_button.Text = "Sluiten";
             this.exit_button.UseVisualStyleBackColor = true;
@@ -100,10 +93,9 @@ namespace DesignPatterns
             // 
             // clear_button
             // 
-            this.clear_button.Location = new System.Drawing.Point(793, 17);
-            this.clear_button.Margin = new System.Windows.Forms.Padding(4);
+            this.clear_button.Location = new System.Drawing.Point(595, 14);
             this.clear_button.Name = "clear_button";
-            this.clear_button.Size = new System.Drawing.Size(100, 28);
+            this.clear_button.Size = new System.Drawing.Size(75, 23);
             this.clear_button.TabIndex = 2;
             this.clear_button.Text = "Legen";
             this.clear_button.UseVisualStyleBackColor = true;
@@ -111,10 +103,9 @@ namespace DesignPatterns
             // 
             // save_button
             // 
-            this.save_button.Location = new System.Drawing.Point(685, 17);
-            this.save_button.Margin = new System.Windows.Forms.Padding(4);
+            this.save_button.Location = new System.Drawing.Point(514, 14);
             this.save_button.Name = "save_button";
-            this.save_button.Size = new System.Drawing.Size(100, 28);
+            this.save_button.Size = new System.Drawing.Size(75, 23);
             this.save_button.TabIndex = 1;
             this.save_button.Text = "Opslaan";
             this.save_button.UseVisualStyleBackColor = true;
@@ -124,20 +115,18 @@ namespace DesignPatterns
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(85, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(64, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 17);
+            this.label1.Size = new System.Drawing.Size(86, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Teken applicatie";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-3, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Location = new System.Drawing.Point(-2, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 66);
+            this.pictureBox1.Size = new System.Drawing.Size(60, 54);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -147,10 +136,9 @@ namespace DesignPatterns
             this.canvasPanel.BackColor = System.Drawing.Color.White;
             this.canvasPanel.Controls.Add(this.toolboxPanel);
             this.canvasPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.canvasPanel.Location = new System.Drawing.Point(0, 63);
-            this.canvasPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.canvasPanel.Location = new System.Drawing.Point(0, 51);
             this.canvasPanel.Name = "canvasPanel";
-            this.canvasPanel.Size = new System.Drawing.Size(1067, 491);
+            this.canvasPanel.Size = new System.Drawing.Size(800, 399);
             this.canvasPanel.TabIndex = 1;
             this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
@@ -163,21 +151,19 @@ namespace DesignPatterns
             this.toolboxPanel.Controls.Add(this.rectangle_button);
             this.toolboxPanel.Controls.Add(this.colorbox);
             this.toolboxPanel.Controls.Add(this.paintbrush_size);
-            this.toolboxPanel.Controls.Add(this.eraser_button);
-            this.toolboxPanel.Controls.Add(this.paintbrush_button);
             this.toolboxPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.toolboxPanel.Location = new System.Drawing.Point(0, 0);
-            this.toolboxPanel.Margin = new System.Windows.Forms.Padding(4);
             this.toolboxPanel.Name = "toolboxPanel";
-            this.toolboxPanel.Size = new System.Drawing.Size(77, 491);
+            this.toolboxPanel.Size = new System.Drawing.Size(58, 399);
             this.toolboxPanel.TabIndex = 0;
             // 
             // ellipse_button
             // 
             this.ellipse_button.Image = ((System.Drawing.Image)(resources.GetObject("ellipse_button.Image")));
-            this.ellipse_button.Location = new System.Drawing.Point(9, 197);
+            this.ellipse_button.Location = new System.Drawing.Point(7, 58);
+            this.ellipse_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ellipse_button.Name = "ellipse_button";
-            this.ellipse_button.Size = new System.Drawing.Size(57, 57);
+            this.ellipse_button.Size = new System.Drawing.Size(43, 46);
             this.ellipse_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ellipse_button.TabIndex = 5;
             this.ellipse_button.TabStop = false;
@@ -186,9 +172,10 @@ namespace DesignPatterns
             // rectangle_button
             // 
             this.rectangle_button.Image = ((System.Drawing.Image)(resources.GetObject("rectangle_button.Image")));
-            this.rectangle_button.Location = new System.Drawing.Point(9, 134);
+            this.rectangle_button.Location = new System.Drawing.Point(7, 7);
+            this.rectangle_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rectangle_button.Name = "rectangle_button";
-            this.rectangle_button.Size = new System.Drawing.Size(57, 57);
+            this.rectangle_button.Size = new System.Drawing.Size(43, 46);
             this.rectangle_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.rectangle_button.TabIndex = 4;
             this.rectangle_button.TabStop = false;
@@ -197,57 +184,34 @@ namespace DesignPatterns
             // colorbox
             // 
             this.colorbox.BackColor = System.Drawing.Color.Black;
-            this.colorbox.Location = new System.Drawing.Point(0, 426);
-            this.colorbox.Margin = new System.Windows.Forms.Padding(4);
+            this.colorbox.Location = new System.Drawing.Point(0, 346);
             this.colorbox.Name = "colorbox";
-            this.colorbox.Size = new System.Drawing.Size(77, 65);
+            this.colorbox.Size = new System.Drawing.Size(58, 53);
             this.colorbox.TabIndex = 3;
             this.colorbox.TabStop = false;
             this.colorbox.Click += new System.EventHandler(this.colorbox_Click);
             // 
             // paintbrush_size
             // 
-            this.paintbrush_size.Location = new System.Drawing.Point(0, 400);
-            this.paintbrush_size.Margin = new System.Windows.Forms.Padding(4);
+            this.paintbrush_size.Location = new System.Drawing.Point(0, 325);
             this.paintbrush_size.Name = "paintbrush_size";
-            this.paintbrush_size.Size = new System.Drawing.Size(77, 22);
+            this.paintbrush_size.Size = new System.Drawing.Size(58, 20);
             this.paintbrush_size.TabIndex = 2;
-            this.paintbrush_size.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            this.paintbrush_size.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.paintbrush_size.ValueChanged += new System.EventHandler(this.paintbrushsize_change);
-            // 
-            // eraser_button
-            // 
-            this.eraser_button.Image = ((System.Drawing.Image)(resources.GetObject("eraser_button.Image")));
-            this.eraser_button.Location = new System.Drawing.Point(9, 75);
-            this.eraser_button.Margin = new System.Windows.Forms.Padding(4);
-            this.eraser_button.Name = "eraser_button";
-            this.eraser_button.Size = new System.Drawing.Size(57, 52);
-            this.eraser_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.eraser_button.TabIndex = 1;
-            this.eraser_button.TabStop = false;
-            this.eraser_button.Click += new System.EventHandler(this.eraser_button_Click);
-            // 
-            // paintbrush_button
-            // 
-            this.paintbrush_button.Image = ((System.Drawing.Image)(resources.GetObject("paintbrush_button.Image")));
-            this.paintbrush_button.Location = new System.Drawing.Point(9, 11);
-            this.paintbrush_button.Margin = new System.Windows.Forms.Padding(4);
-            this.paintbrush_button.Name = "paintbrush_button";
-            this.paintbrush_button.Size = new System.Drawing.Size(57, 57);
-            this.paintbrush_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.paintbrush_button.TabIndex = 0;
-            this.paintbrush_button.TabStop = false;
-            this.paintbrush_button.Click += new System.EventHandler(this.paintbrush_button_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.canvasPanel);
             this.Controls.Add(this.TopPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.TopPanel.ResumeLayout(false);
@@ -259,9 +223,8 @@ namespace DesignPatterns
             ((System.ComponentModel.ISupportInitialize)(this.rectangle_button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_size)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.eraser_button)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paintbrush_button)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         private System.Windows.Forms.Button load_button;
@@ -278,8 +241,6 @@ namespace DesignPatterns
         private System.Windows.Forms.Button save_button;
         private System.Windows.Forms.PictureBox colorbox;
         private System.Windows.Forms.NumericUpDown paintbrush_size;
-        private System.Windows.Forms.PictureBox eraser_button;
-        private System.Windows.Forms.PictureBox paintbrush_button;
         private System.Windows.Forms.PictureBox rectangle_button;
         private System.Windows.Forms.PictureBox ellipse_button;
     }
