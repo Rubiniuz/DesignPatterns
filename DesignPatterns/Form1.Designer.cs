@@ -38,6 +38,7 @@ namespace DesignPatterns
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.canvasPanel = new System.Windows.Forms.Panel();
             this.toolboxPanel = new System.Windows.Forms.Panel();
+            this.rectangle_button = new System.Windows.Forms.PictureBox();
             this.colorbox = new System.Windows.Forms.PictureBox();
             this.paintbrush_size = new System.Windows.Forms.NumericUpDown();
             this.eraser_button = new System.Windows.Forms.PictureBox();
@@ -46,6 +47,7 @@ namespace DesignPatterns
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.canvasPanel.SuspendLayout();
             this.toolboxPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.rectangle_button)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.eraser_button)).BeginInit();
@@ -130,10 +132,12 @@ namespace DesignPatterns
             this.canvasPanel.TabIndex = 1;
             this.canvasPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             this.canvasPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseMove);
+            this.canvasPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseUp);
             // 
             // toolboxPanel
             // 
             this.toolboxPanel.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.toolboxPanel.Controls.Add(this.rectangle_button);
             this.toolboxPanel.Controls.Add(this.colorbox);
             this.toolboxPanel.Controls.Add(this.paintbrush_size);
             this.toolboxPanel.Controls.Add(this.eraser_button);
@@ -143,6 +147,17 @@ namespace DesignPatterns
             this.toolboxPanel.Name = "toolboxPanel";
             this.toolboxPanel.Size = new System.Drawing.Size(58, 399);
             this.toolboxPanel.TabIndex = 0;
+            // 
+            // rectangle_button
+            // 
+            this.rectangle_button.Image = ((System.Drawing.Image)(resources.GetObject("rectangle_button.Image")));
+            this.rectangle_button.Location = new System.Drawing.Point(7, 109);
+            this.rectangle_button.Name = "rectangle_button";
+            this.rectangle_button.Size = new System.Drawing.Size(43, 41);
+            this.rectangle_button.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.rectangle_button.TabIndex = 4;
+            this.rectangle_button.TabStop = false;
+            this.rectangle_button.Click += new System.EventHandler(this.rectangle_button_Click);
             // 
             // colorbox
             // 
@@ -204,6 +219,7 @@ namespace DesignPatterns
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.canvasPanel.ResumeLayout(false);
             this.toolboxPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.rectangle_button)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.colorbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paintbrush_size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eraser_button)).EndInit();
@@ -226,6 +242,7 @@ namespace DesignPatterns
         private System.Windows.Forms.NumericUpDown paintbrush_size;
         private System.Windows.Forms.PictureBox eraser_button;
         private System.Windows.Forms.PictureBox paintbrush_button;
+        private System.Windows.Forms.PictureBox rectangle_button;
     }
 }
 

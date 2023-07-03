@@ -14,6 +14,13 @@ namespace DesignPatterns
     public partial class Form1 : Form
     {
 
+        public enum DrawState
+        {
+            Brush,
+            Rectangle,
+            Elipse
+        }
+
         public Point current = new Point();
         public Point old = new Point();
 
@@ -23,6 +30,7 @@ namespace DesignPatterns
         public Pen pen = new Pen(Color.Black, 5);
 
         Bitmap surface;
+        public DrawState drawState = DrawState.Brush;
 
         public Form1()
         {
@@ -43,22 +51,39 @@ namespace DesignPatterns
             pen.Width = (float)paintbrush_size.Value;
         }
 
+        private Boolean isRectangleMoving = false;
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             old = e.Location;
-
+            isRectangleMoving = true;
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left) {
-                current = e.Location;
-                g.DrawLine(pen, old, current);
-                graph.DrawLine(pen, old, current);
+                if (drawState == DrawState.Brush) {
+                    current = e.Location;
+                    g.DrawLine(pen, old, current);
+                    graph.DrawLine(pen, old, current);
 
-                old = current;
+                    old = current;
+                }
             }
         }
+        private void canvas_MouseUp(object sender, MouseEventArgs e)
+        {
+            isRectangleMoving = false;
+            if (drawState == DrawState.Rectangle) {
+                int width = e.X - old.X;
+                int height = e.Y - old.Y;
+
+                Rectangle rect = new Rectangle(old.X, old.Y, width * Math.Sign(width), height * Math.Sign(height));
+
+                g.DrawRectangle(pen, rect);
+                graph.DrawRectangle(pen, rect);
+            }
+        }
+
         private Point mouseOffsetPos;
         private Boolean isMouseDown = false;
 
@@ -96,12 +121,14 @@ namespace DesignPatterns
         private void eraser_button_Click(object sender, EventArgs e)
         {
             pen.Color = Color.White;
+            drawState = DrawState.Brush;
 
         }
 
         private void paintbrush_button_Click(object sender, EventArgs e)
         {
             pen.Color = colorbox.BackColor;
+            drawState = DrawState.Brush;
         }
 
         private void colorbox_Click(object sender, EventArgs e)
@@ -136,6 +163,11 @@ namespace DesignPatterns
         private void paintbrushsize_change(object sender, EventArgs e)
         {
             pen.Width = (float)paintbrush_size.Value;
+        }
+
+        private void rectangle_button_Click(object sender, EventArgs e)
+        {
+            drawState = DrawState.Rectangle;
         }
     }
 }
