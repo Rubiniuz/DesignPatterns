@@ -254,5 +254,20 @@ namespace DesignPatterns
             
             return (MinVal,Maxval);
         }
+
+        private void select_button_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void move_button_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void resize_button_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
