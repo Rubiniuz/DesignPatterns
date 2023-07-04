@@ -1,11 +1,8 @@
 ﻿namespace DesignPatterns
 {
-    public interface Visitor
+    public interface Visitor // Visitor Pattern
     {
         void VisitRectangle(RectangleDrawable rect);
         void VisitEllipse(EllipseDrawable elip);
-        void VisitSelection(SelectionDrawable sel);
-        void VisitMove(MoveDrawable move);
-        void VisitScale(ScaleDrawable size);
     }
 }

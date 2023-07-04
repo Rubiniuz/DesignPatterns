@@ -9,57 +9,57 @@ namespace DesignPatterns
 {
     public class DrawableHistory
     {
-        Stack<Drawable> history = new Stack<Drawable>();
-        List<Drawable> redoArray = new List<Drawable>();
+        Stack<Command> history = new Stack<Command>();
+        List<Command> redoArray = new List<Command>();
 
         public DrawableHistory() { }
 
-        public Stack<Drawable> get()
+        public Stack<Command> get()
         {
             return this.history;
         }
 
-        public void push(Drawable drawable)
+        public void push(Command command)
         {
-            history.Push(drawable);
+            history.Push(command);
         }
 
         public void undo()
         {
 
-            Drawable last = this.getNextCommand(history, true);
+            Command last = this.getNextCommand(history, true);
             if (last == null) return;
 
-            Trace.WriteLine(last);
-            last.setVisible(false);
+            Console.WriteLine(last);
+            last.Undo();
             redoArray.Add(last);
         }
 
         public void redo()
         {
-            Drawable redoAction = redoArray.Last();
-            Drawable lastAction = this.getNextCommand(history, false);
+            Command redoAction = redoArray.Last();
+            Command lastAction = this.getNextCommand(history, false);
             if (redoAction == null || lastAction == null) return;
 
             if (redoAction == lastAction) {
                 history.Pop();
                 redoArray.RemoveAt(redoArray.Count - 1);
 
-                redoAction.setVisible(true);
+                redoAction.ShouldExecute = true;
                 history.Push(redoAction);
             } else
             {
-                Trace.WriteLine("Not the same objects...");
+                Console.WriteLine("Not the same objects...");
             }
         }
 
-        private Drawable getNextCommand(Stack<Drawable> array, bool isVisible)
+        private Command getNextCommand(Stack<Command> array, bool ShouldExecute)
         {
-            foreach(Drawable drawable in array)
+            foreach(Command command in array)
             {
-                if (drawable != null && (drawable.isVisible() == isVisible))
+                if (command != null && (command.ShouldExecute == ShouldExecute))
                 {
-                    return drawable;
+                    return command;
                 }
             }
 

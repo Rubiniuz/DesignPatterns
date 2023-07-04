@@ -9,16 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace DesignPatterns
 {
     public partial class Form1 : Form
     {
+        
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
+        
         public Point current = new Point();
         public Point old = new Point();
 
         public Graphics g;
         public Graphics graph;
+        public List<Graphics> graphics = new List<Graphics>();
 
         public Pen pen = new Pen(Color.Black, 5);
 
@@ -30,6 +37,7 @@ namespace DesignPatterns
         public Form1()
         {
             InitializeComponent();
+            AllocConsole(); // enable debug console
 
             g = canvasPanel.CreateGraphics();
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -44,9 +52,12 @@ namespace DesignPatterns
             canvasPanel.BackgroundImageLayout = ImageLayout.None;
 
             pen.Width = (float)paintbrush_size.Value;
+            
+            graphics.Add(graph);
+            graphics.Add(g);
 
             //Initialize events
-            Trace.WriteLine("Events initialized");
+            Console.WriteLine("Events initialized");
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
             this.KeyUp += new KeyEventHandler(Form1_KeyUp);
@@ -55,6 +66,7 @@ namespace DesignPatterns
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
             old = e.Location;
+            Console.WriteLine("MouseDown");
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
@@ -65,32 +77,30 @@ namespace DesignPatterns
         }
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {
-
             (Point,Point) normalized = NormalizePoints(old, e.Location);
             Point Minval = normalized.Item1;
             Point Maxval = normalized.Item2;
 
-            int width = Maxval.X - Minval.X;
-            int height = Maxval.Y - Minval.Y;
-
             if (drawState == DrawState.RECTANGLE) {
                 RectangleDrawable rd = new RectangleDrawable(Minval, Maxval, pen);
-                history.push(rd);
+                DrawCommand command = new DrawCommand(rd, graphics);
+                history.push(command);
             } else if (drawState == DrawState.ELLIPSE) {
                 EllipseDrawable ed = new EllipseDrawable(Minval, Maxval, pen);
-                history.push(ed);
+                DrawCommand command = new DrawCommand(ed, graphics);
+                history.push(command);
             } else if (drawState == DrawState.SELECT) {
-                SelectionDrawable sd = new SelectionDrawable(Minval, Maxval, pen);
-                history.push(sd);
+                SelectCommand command = new SelectCommand(Minval, Maxval); 
+                history.push(command);
             } else if (drawState == DrawState.MOVE) {
-                MoveDrawable md = new MoveDrawable(Minval, Maxval, pen);
-                history.push(md);
+                MoveCommand command = new MoveCommand(old, e.Location);
+                history.push(command);
             } else if (drawState == DrawState.SCALE) {
-                ScaleDrawable sd = new ScaleDrawable(Minval, Maxval, pen);
-                history.push(sd);
+                ResizeCommand command = new ResizeCommand(old, e.Location);
+                history.push(command);
             }
 
-            Trace.WriteLine("MouseUP");
+            Console.WriteLine("MouseUP. " + "Min & Max: " + Minval + ", " + Maxval + " history size: " + history.get().Count);
             DrawManager.GetInstance().renderSurface(history, graph, g);
         }
 
@@ -136,12 +146,15 @@ namespace DesignPatterns
                 pen.Color = cd.Color;
                 colorbox.BackColor = cd.Color;
             }
+            Console.WriteLine("Color changed to: " + pen.Color);
         }
 
         private void clear_button_Click(object sender, EventArgs e)
         {
             graph.Clear(Color.White);
             canvasPanel.Invalidate();
+            history = new DrawableHistory();
+            Console.WriteLine("Clear Canvas and Commands");
         }
 
         private void save_button_Click(object sender, EventArgs e)
@@ -166,12 +179,14 @@ namespace DesignPatterns
         {
             pen.Color = colorbox.BackColor;
             drawState = DrawState.RECTANGLE;
+            Console.WriteLine("DrawState: " + drawState);
         }
 
         private void ellipse_button_Click(object sender, EventArgs e)
         {
             pen.Color = colorbox.BackColor;
             drawState = DrawState.ELLIPSE;
+            Console.WriteLine("DrawState: " + drawState);
         }
 
         private void load_button_Click(object sender, EventArgs e)
@@ -266,16 +281,19 @@ namespace DesignPatterns
         private void move_button_Click(object sender, EventArgs e)
         {
             drawState = DrawState.MOVE;
+            Console.WriteLine("DrawState: " + drawState);
         }
 
         private void resize_button_Click(object sender, EventArgs e)
         {
             drawState = DrawState.SCALE;
+            Console.WriteLine("DrawState: " + drawState);
         }
         
         private void select_button_Click(object sender, EventArgs e)
         {
             drawState = DrawState.SELECT;
+            Console.WriteLine("DrawState: " + drawState);
         }
     }
 }

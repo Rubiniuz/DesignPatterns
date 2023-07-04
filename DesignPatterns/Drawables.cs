@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DesignPatterns
 {
-    public abstract class Drawable
+    public abstract class Drawable // Strategy Pattern
     {
         protected Point startPos;
         protected Point endPos;
@@ -30,37 +30,7 @@ namespace DesignPatterns
         {
             this.visible = visible;
         }
-        
-        public (Point, Point) GetNormalBounds()
-        {
-            Point MinVal = new Point();
-            Point Maxval = new Point();
 
-            if (startPos.X < endPos.X)
-            {
-                MinVal.X = startPos.X;
-                Maxval.X = endPos.X;
-            }
-            else
-            {
-                MinVal.X = endPos.X;
-                Maxval.X = startPos.X;
-            }
-            
-            if (startPos.Y < endPos.Y)
-            {
-                MinVal.Y = startPos.Y;
-                Maxval.Y = endPos.Y;
-            }
-            else
-            {
-                MinVal.Y = endPos.Y;
-                Maxval.Y = startPos.Y;
-            }
-            
-            return (MinVal,Maxval);
-        }
-        
         public Point getStartPos()
         {
             return startPos;
@@ -179,125 +149,6 @@ namespace DesignPatterns
         public override void accept(Visitor visitor)
         {
             visitor.VisitEllipse(this);
-        }
-    }
-    
-    public class SelectionDrawable : Drawable
-    {
-        // selection is a rectangle. where start point to endpoint defines the selection area.
-        // use isInBounds to check if a point is within the selection area.
-        public SelectionDrawable(Point _startPos, Point _endPos, Pen _pen)
-        {
-            this.startPos = _startPos;
-            this.endPos = _endPos;
-            this.pen = _pen;
-        }
-
-        public override void draw(Graphics graph)
-        {
-        }
-        
-        public override bool isInBounds(Point p)
-        {
-            Point MinVal = new Point();
-            Point Maxval = new Point();
-
-            if (startPos.X < endPos.X)
-            {
-                MinVal.X = startPos.X;
-                Maxval.X = endPos.X;
-            }
-            else
-            {
-                MinVal.X = endPos.X;
-                Maxval.X = startPos.X;
-            }
-            
-            if (startPos.Y < endPos.Y)
-            {
-                MinVal.Y = startPos.Y;
-                Maxval.Y = endPos.Y;
-            }
-            else
-            {
-                MinVal.Y = endPos.Y;
-                Maxval.Y = startPos.Y;
-            }
-
-            if (p.X > MinVal.X && p.X < Maxval.X && p.Y > MinVal.Y && p.Y < Maxval.Y)
-            {
-                return true; // Within Bounds
-            }
-            else
-            {
-                return false; // Not in Bounds
-            }
-        }
-        
-        public override void accept(Visitor visitor)
-        {
-            visitor.VisitSelection(this);
-        }
-    }
-
-    public class MoveDrawable : Drawable
-    {
-        // Move is a rectangle. where start point to endpoint is the movement change of the selected items
-        public MoveDrawable(Point _startPos, Point _endPos, Pen _pen)
-        {
-            this.startPos = _startPos;
-            this.endPos = _endPos;
-            this.pen = _pen;
-        }
-
-        public override void draw(Graphics graph)
-        {
-        }
-        
-        public override bool isInBounds(Point p)
-        {
-            return false;
-        }
-        
-        public override void accept(Visitor visitor)
-        {
-            visitor.VisitMove(this);
-        }
-        
-        public Point getChange()
-        {
-            (Point, Point) bounds = GetNormalBounds();
-            return new Point(bounds.Item2.X - bounds.Item1.X, bounds.Item2.Y - bounds.Item1.Y);
-        }
-    }
-    
-    public class ScaleDrawable : Drawable
-    {
-        // scale is a rectangle. where start point to endpoint is the scale increase of the selected items
-        public ScaleDrawable(Point _startPos, Point _endPos, Pen _pen)
-        {
-            this.startPos = _startPos;
-            this.endPos = _endPos;
-            this.pen = _pen;
-        }
-
-        public override void draw(Graphics graph)
-        {
-        }
-        
-        public override bool isInBounds(Point p)
-        {
-            return false;
-        }
-        
-        public override void accept(Visitor visitor)
-        {
-            visitor.VisitScale(this);
-        }
-        
-        public Point getChange()
-        {
-            return new Point(endPos.X - startPos.X, endPos.Y - startPos.Y);
         }
     }
 }

@@ -9,11 +9,14 @@ using System.Windows.Forms;
 
 namespace DesignPatterns
 {
-    public class DrawManager {
+    public class DrawManager { // Singleton Pattern
 
         private static DrawManager _instance;
-        private List<Drawable> commands = new List<Drawable>();
-        private List<Drawable> selection = new List<Drawable>();
+        //private List<Drawable> commands = new List<Drawable>();
+        private List<Command> commands = new List<Command>();
+        List<Drawable> selection = new List<Drawable>();
+        SelectCommand currentSelect;
+        List<Drawable> currentDrawables = new List<Drawable>();
 
         private DrawManager() { }
 
@@ -29,90 +32,50 @@ namespace DesignPatterns
         public void renderSurface(DrawableHistory history, Graphics graph, Graphics g)
         {
             commands.Clear();
-
-            Stack<Drawable> list = history.get(); // Use select move and scale to alter data.
-            foreach (Drawable d in list)
+            Stack<Command> list = history.get(); // Use select move and scale to alter data.
+            foreach (Command d in list)
             {
-                if (d != null && d.isVisible())
+                if (d != null && d.ShouldExecute)
                 {
-                    //commands.Add(d);
-                    // if one command is selection.
-                    if (d.GetType() == typeof(SelectionDrawable))
+                    switch (d)
                     {
-                        selection.Clear();
-                        foreach (var d2 in list)
-                        {
-                            if (d2 != d)
-                            {
-                                (Point,Point) bounds = d2.GetNormalBounds();
-                                Point topLeft = bounds.Item1;
-                                Point bottomRight = bounds.Item2;
-                                Point topRight = new Point(bounds.Item2.X, bounds.Item1.Y);
-                                Point bottomLeft = new Point(bounds.Item1.X, bounds.Item2.Y);
-                                if (d.isInBounds(topLeft) || d.isInBounds(bottomRight) || d.isInBounds(topRight) || d.isInBounds(bottomLeft))
-                                {
-                                    selection.Add(d2);
-                                }
-                            }
-                        }
-                        Trace.WriteLine("Selection: " + selection.Count);
-                    }
-                    else if (d.GetType() == typeof(MoveDrawable))
-                    {
-                        Point change = ((MoveDrawable)d).getChange();
-                        foreach (var dm in selection)
-                        {
-                            Point sp = dm.getStartPos();
-                            Point ep = dm.getEndPos();
-                            sp.X += change.X;
-                            sp.Y += change.Y;
-                            ep.X += change.X;
-                            ep.Y += change.Y;
-                            dm.setStartPos(sp);
-                            dm.setEndPos(ep);
-                        }
-                    }
-                    else if (d.GetType() == typeof(ScaleDrawable))
-                    {
-                        Point change = ((ScaleDrawable)d).getChange();
-                        foreach (var dm in selection)
-                        {
-                            Point sp = dm.getStartPos();
-                            Point ep = dm.getEndPos();
-                            sp.X -= change.X;
-                            sp.Y -= change.Y;
-                            ep.X += change.X;
-                            ep.Y += change.Y;
-                            dm.setStartPos(sp);
-                            dm.setEndPos(ep);
-                        }
+                        case DrawCommand draw:
+                            if(!currentDrawables.Contains(draw.getDrawable()))
+                                currentDrawables.Add(draw.getDrawable());
+                            break;
+                        case SelectCommand select:
+                            selection = new List<Drawable>(); // clear old selection after adding the drawables back to available drawables
+                            select.SetSelected(currentDrawables); // is execute in this case. uses current available drawables
+                            selection.AddRange(select.GetSelected()); // set selection for other commands
+                            currentSelect = select;
+                            Console.WriteLine("Selection: " + selection.Count);
+                            break;
+                        case MoveCommand move:
+                            move.SetDrawables(selection);
+                            move.Execute();
+                            selection.Clear();
+                            Console.WriteLine("Moved: " + selection.Count);
+                            break;
+                        case ResizeCommand resize:
+                            resize.SetDrawables(selection);
+                            resize.Execute();
+                            selection.Clear();
+                            Console.WriteLine("Resized: " + selection.Count);
+                            break;
                     }
                 }
-            }
-
-            foreach (var d in list)
-            {
-                if (d != null && d.isVisible())
-                {
-                    Type type = d.GetType();
-                    if (type == typeof(SelectionDrawable) || type == typeof(MoveDrawable) || type == typeof(ScaleDrawable))
-                    {
-                        // Do nothing.
-                    }
-                    else
-                    {
-                        commands.Add(d);
-                    }
-                }
+                commands.Add(d);
             }
 
             graph.Clear(Color.White);
             g.Clear(Color.White);
 
-            foreach(Drawable d in commands)
+            foreach(Command c in commands)
             {
-                d.draw(graph);
-                d.draw(g);
+                if(c.GetType() == typeof(DrawCommand))
+                {
+                    c.Execute();
+                }
             }
         }
 
